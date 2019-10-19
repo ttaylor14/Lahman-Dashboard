@@ -8,6 +8,10 @@ import plotly.graph_objs as go
 
 df = pd.read_csv('Lahman_Database/core/Batting.csv')
 
+# Clean Years
+df = df[df['yearID'] >= 1975]
+
+
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)

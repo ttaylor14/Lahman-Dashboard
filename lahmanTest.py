@@ -15,13 +15,21 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 
 # Step 2: Import the Data
+df = pd.read_csv('Lahman_Database/core/Batting.csv')
+
+# Clean Years
+df = df[df['yearID'] >= 1975]
+
+
+
+
+
 dfPeo = pd.read_csv('Lahman_Database/core/People.csv')
 
 dfTMFran = pd.read_csv('Lahman_Database/core/TeamsFranchises.csv')
 dfCPlay = pd.read_csv('Lahman_Database/core/CollegePlaying.csv')
 
 
-df = pd.read_csv('Lahman_Database/core/Batting.csv')
 dfBatPost = pd.read_csv('Lahman_Database/core/BattingPost.csv')
 
 dfPit = pd.read_csv('Lahman_Database/core/Pitching.csv')
@@ -105,8 +113,6 @@ app.layout = html.Div([
     Output('indicator-graphic', 'figure'),
     [Input('xaxis_column_name', 'value'),
      Input('yaxis_column_name', 'value'),
-     Input('xaxis_column_type', 'value'),
-     Input('yaxis_column_type', 'value'),
      Input('year--slider', 'value')])
 
 
@@ -129,7 +135,16 @@ def update_graph(xaxis_column_name, yaxis_column_name,
                 'line': {'width': 0.5, 'color': 'white'}
             }
         )],
-
+        'layout': go.Layout(
+            xaxis={
+                'title': xaxis_column_name
+            },
+            yaxis={
+                'title': yaxis_column_name
+            },
+            margin={'l': 40, 'b': 40, 't': 10, 'r': 0},
+            hovermode='closest'
+        )
     }
 
 
