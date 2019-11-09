@@ -25,32 +25,6 @@ app.layout = html.Div([
             value=['Batting']
         ),
 
-        dcc.Dropdown(
-            id='XAxis',
-            options=[{'label': i, 'value': i} for i in df.columns.values],
-            value='HR'
-        ),
-
-        dcc.Dropdown(
-            id='YAxis',
-            options=[{'label': i, 'value': i} for i in df.columns.values],
-            value='AB'
-        ),
-
-        dcc.RangeSlider(
-            id='year_slider',
-            min=2000,
-            max=2018,
-            marks={
-                2000: {'label': '2000', 'style': {'color': '#f50'}},
-                2005: {'label': '2005'},
-                2010: {'label': '2010'},
-                2015: {'label': '2015'},
-                2018: {'label': '2018', 'style': {'color': '#f50'}}
-            },
-            value=[2017, 2018]
-        ),
-
         # Graph Box-Plot
         dcc.Graph(
             figure={
@@ -80,17 +54,9 @@ app.layout = html.Div([
                 'overflowX': 'scroll',
                 'border': 'thin lightgrey solid'
             }
-        ),
-    html.Div(id='output-container-range-slider')
+        )
+
 ])
-
-
-@app.callback(
-    dash.dependencies.Output('output-container-range-slider', 'children'),
-    [dash.dependencies.Input('year_slider', 'value')])
-def update_output(value):
-    return 'You have selected "{}"'.format(value)
-
 
 
 
