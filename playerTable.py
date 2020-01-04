@@ -7,7 +7,10 @@ import plotly.graph_objs as go
 
 df = pd.read_csv('Lahman_Database/core/Batting.csv')
 
-df = df[df['yearID'] == 2018]
+#df = df[df['yearID'] == 2018]
+
+# Clean Years
+df = df[df['yearID'] >= 2000]
 
 app = dash.Dash(__name__)
 
@@ -51,19 +54,7 @@ app.layout = html.Div([
             value=[2017, 2018]
         ),
 
-        # Graph Box-Plot
-        dcc.Graph(
-            figure={
-            'data': [
-                go.Scatter(
-                x= df['HR'],
-                y= df['SO'],
-                mode = 'markers'
-                )]
-            },
-            id='box-plot-1'
-
-        ),
+        dcc.Graph(id='Center_Graph'),
 
 
         # Data Table
@@ -81,16 +72,45 @@ app.layout = html.Div([
                 'border': 'thin lightgrey solid'
             }
         ),
+
     html.Div(id='output-container-range-slider')
 ])
 
-
+# Callback Function
 @app.callback(
-    dash.dependencies.Output('output-container-range-slider', 'children'),
-    [dash.dependencies.Input('year_slider', 'value')])
-def update_output(value):
-    return 'You have selected "{}"'.format(value)
+    Output('Center_Graph', 'figure'),
+    [Input('XAxis', 'value'),
+     Input('YAxis', 'value'),
+     Input('year_slider', 'value')])
 
+
+def update_graph(XAxis, YAxis, year_value):
+    dff = df[df['yearID'] == year_value]
+
+
+
+
+    return {
+        'data': [go.Scatter(
+            x=dff[dff['Indicator Name'] == XAxis]['Value'],
+            y=dff[dff['Indicator Name'] == YAxis]['Value'],
+            mode='markers',
+            marker={
+                'size': 15,
+                'opacity': 0.5,
+                'line': {'width': 0.5, 'color': 'white'}
+            }
+        )],
+        'layout': go.Layout(
+            xaxis={
+                'title': XAxis
+            },
+            yaxis={
+                'title': YAxis
+            },
+            hovermode='closest'
+        )
+    }
 
 
 
