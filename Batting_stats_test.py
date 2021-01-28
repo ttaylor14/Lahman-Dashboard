@@ -15,6 +15,8 @@ import plotly.express as px #(need to pip install plotly==4.4.1)
 
 df = pd.read_csv("baseballdatabank-master\core\Batting.csv")
 
+min_year = df.yearID.min()
+max_year = df.yearID.max()
 
 # you need to include __name__ in your Dash constructor if
 # you plan to use a custom CSS or JavaScript in your Dash apps
@@ -29,17 +31,27 @@ app.layout = html.Div([
 
         dcc.RangeSlider(
             id='Season',
-            min=-2000,
-            max=2020,
-            step=1,
             marks={
                 2000: {'label': '2000', 'style': {'color': '#77b0b1'}},
                 2010: {'label': '2010'},
                 2015: {'label': '2015'},
                 2020: {'label': '2020', 'style': {'color': '#f50'}}
             },
-            value=[2018, 2020],
-            allowCross=False
+            step=1,
+            min = min_year,
+            max = max_year,
+            value = [2018, 2020],
+            dots = True,
+            allowCross = False,
+            disabled = False,
+            pushable = 0,
+            updatemode = 'drag',
+            included = True,
+            vertical = False,
+            verticalHeight = 900,
+            className = 'None',
+            # tooltip = {"always visible":False, "placement":'bottom'}
+
         ),  
 
         dcc.Dropdown(
