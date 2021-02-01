@@ -13,7 +13,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.express as px #(need to pip install plotly==4.4.1)
 
-df = pd.read_csv("baseballdatabank-master\core\Batting.csv")
+df = pd.read_csv("baseballdatabank-master/core/Batting.csv")
 
 min_year = df.yearID.min()
 max_year = df.yearID.max()
