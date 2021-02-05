@@ -56,21 +56,20 @@ app.layout = html.Div([
 
         dcc.Graph(id='Center_Graph'),
 
+        params = ['Weight', 'Torque', 'Width', 'Height', 'Efficiency', 'Power', 'Displacement']
 
         # Data Table
         dash_table.DataTable(
-            id='datatable',
-            columns=[{"name": i, "id": i, "deletable": False, "selectable": True} for i in df.columns],
-            filter_action="native",
-            sort_action="native",
-            sort_mode="multi",
-            data=df.to_dict('records'),
-            style_table={
-                'maxHeight': '300px',
-                'overflowY': 'scroll',
-                'overflowX': 'scroll',
-                'border': 'thin lightgrey solid'
-            }
+            id='table-editing-simple',
+            columns=(
+                [{'id': 'Model', 'name': 'Model'}] +
+                [{'id': p, 'name': p} for p in params]
+            ),
+            data=[
+                dict(Model=i, **{param: 0 for param in params})
+                for i in range(1, 5)
+            ],
+            editable=True
         ),
 
     html.Div(id='output-container-range-slider')
@@ -112,6 +111,24 @@ def update_graph(XAxis, YAxis, year_value):
         )
     }
 
+
+
+@app.callback(
+    Output('table-editing-simple-output', 'figure'),
+    Input('table-editing-simple', 'data'),
+    Input('table-editing-simple', 'columns'))
+def display_output(rows, columns):
+    dff=df
+    dff = pd.DataFrame(rows, columns=[c['name'] for c in columns])
+    return {
+        'data': [{
+            'type': 'parcoords',
+            'dimensions': [{
+                'label': col['name'],
+                'values': dff[col['id']]
+            } for col in columns]
+        }]
+    }
 
 
 if __name__ == '__main__':
