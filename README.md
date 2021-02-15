@@ -2,15 +2,18 @@
 Creating a visual interactive dashboard for the Lahman Historical baseball Database
 
 
-Lahman Database can be found here:
+Lahman Database can be accessed at the following location:
 
 http://www.seanlahman.com/baseball-archive/statistics/
 
 
 
-Each of the following Dashboard utilize User's Input to narrow the range of included individuals. This can be done by Years, Teams, Leagues, Players, or Positions.
+Each of the following Dashboard utilize User's Input to narrow the range of included individuals and historical data.
 
-The user also has the ability to explore various statistical data to draw their own comparisons and conclusions.
+This can be done by Years, Teams, Leagues, Players, Positions, or any combination the user seeks.
+
+
+To adjust the graph output the user has the ability to select bothte  x-axis and y-axis values as well as the color grouping of the represented scatter and violin plots.
 
 
 
@@ -18,16 +21,48 @@ The user also has the ability to explore various statistical data to draw their 
 
 https://lahman-batting.herokuapp.com/
 
+File: 'lahmanBatting.py'
+
+The data was compiled from:
+
+All Historical Batting Stats : 'baseballdatabank-master/core/Batting.csv'
+All Historical Player Apperances : 'baseballdatabank-master/core/Appearances.csv'
+All Historical Player Information : 'baseballdatabank-master/core/People.csv'
+All Historical Team Information : 'baseballdatabank-master/core/Teams.csv'
+
+![plot](images/batting_correlation_plot_2015-2020.png)
+
 
 # Lahman Pitching Stat Dashboard:
 
 https://lahman-pitching.herokuapp.com/
+
+File: 'lahmanPitching.py'
+
+The data was compiled from:
+
+All Historical Pitching Stats : 'baseballdatabank-master/core/Pitching.csv'
+All Historical Player Apperances : 'baseballdatabank-master/core/Appearances.csv'
+All Historical Player Information : 'baseballdatabank-master/core/People.csv'
+All Historical Team Information : 'baseballdatabank-master/core/Teams.csv'
+
+![plot](images/pitching_correlation_plot_2015-2020.png)
 
 
 # Lahman Combined Batting and Pitching Stat Dashboard:
 
 https://lahman-combined.herokuapp.com/
 
+
+File: 'lahmanMerged.py'
+
+The data was compiled from:
+
+All Historical Batting Stats : 'baseballdatabank-master/core/Batting.csv'
+All Historical Pitching Stats : 'baseballdatabank-master/core/Pitching.csv'
+All Historical Player Apperances : 'baseballdatabank-master/core/Appearances.csv'
+All Historical Player Information : 'baseballdatabank-master/core/People.csv'
+All Historical Team Information : 'baseballdatabank-master/core/Teams.csv'
 
 
 
