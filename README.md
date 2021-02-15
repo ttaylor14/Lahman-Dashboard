@@ -15,6 +15,8 @@ This can be done by Years, Teams, Leagues, Players, Positions, or any combinatio
 
 To adjust the graph output the user has the ability to select bothte  x-axis and y-axis values as well as the color grouping of the represented scatter and violin plots.
 
+![plot](images/App_Overview.png)
+
 
 
 # Lahman Batting Stat Dashboard:
