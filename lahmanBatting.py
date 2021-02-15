@@ -18,7 +18,7 @@ import plotly.express as px #(need to pip install plotly==4.4.1)
 
 # you need to include __name__ in your Dash constructor if
 # you plan to use a custom CSS or JavaScript in your Dash apps
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX])
 # Allows Heroku to connect to servers:
 server = app.server
 
@@ -316,6 +316,13 @@ app.layout = html.Div([
         dbc.Row([
 
 
+            html.Div(
+                [
+                    dcc.Interval(id="progress-interval", n_intervals=0, interval=500),
+                    dbc.Progress(id="progress"),
+                ]
+            )
+
         ]),
 
     ]),
@@ -324,6 +331,9 @@ app.layout = html.Div([
 
 
 ])
+
+
+
 
 #---------------------------------------------------------------
 
@@ -381,10 +391,12 @@ def dropdown_lg_options(Season, options):
     Output("Player_Checkbox", "options"),
     [Input(component_id='Season',component_property='value'),
     Input(component_id='Lg_Checkbox',component_property='value'),
-    Input(component_id='Team_Checkbox',component_property='value')],
+    Input(component_id='Team_Checkbox',component_property='value'),
+    Input(component_id='input_pos_appear',component_property='value'),
+    Input(component_id='Positions_Checkbox',component_property='value')],
     [State("Player_Checkbox", "options")])
 
-def dropdown_player_options(Season, Lg_Checkbox, Team_Checkbox, options):
+def dropdown_player_options(Season, Lg_Checkbox, Team_Checkbox, input_pos_appear, Positions_Checkbox, options):
 
     dff = df
 
@@ -403,6 +415,24 @@ def dropdown_player_options(Season, Lg_Checkbox, Team_Checkbox, options):
         dff = dff
     else:
         dff = dff[dff.lgID.apply(lambda x: any(item for item in Lg_Checkbox if item in x))]
+
+    # Player Positions
+    if Positions_Checkbox == []:
+        dff = dff
+    else:
+        PositionList = pd.DataFrame() # Clear List
+
+        for i in Positions_Checkbox:
+            print(Positions_Checkbox)
+            print(i)
+            print(input_pos_appear)
+            PositionTemp = dff[ dff[i] >= input_pos_appear ]
+            print(PositionTemp.head())
+            print(PositionList.head())
+            PositionList = PositionList.append(PositionTemp, ignore_index=True)
+            print(PositionList.head())
+
+        dff = PositionList
 
 
 
@@ -464,17 +494,24 @@ def update_scatter_plot(dropdown_X,dropdown_Y,dropdown_Color,Season,Player_Check
         dff = dff[dff.lgID.apply(lambda x: any(item for item in Lg_Checkbox if item in x))]
 
     
-    # Needs fixing - also need to add default input value
+    # Player Positions
     if Positions_Checkbox == []:
         dff = dff
     else:
-        # Only 1 position works
-        # Once fixed add to all graphs and limit player options
-        dff = dff[(dff[Positions_Checkbox[0]] >= input_pos_appear) |
-            (dff[Positions_Checkbox[1]] >= input_pos_appear) |
-            (dff[Positions_Checkbox[2]] >= input_pos_appear) |
-            (dff[Positions_Checkbox[3]] >= input_pos_appear) |
-            (dff[Positions_Checkbox[4]] >= input_pos_appear)]
+        PositionList = pd.DataFrame() # Clear List
+
+        for i in Positions_Checkbox:
+            print(Positions_Checkbox)
+            print(i)
+            print(input_pos_appear)
+            PositionTemp = dff[ dff[i] >= input_pos_appear ]
+            print(PositionTemp.head())
+            print(PositionList.head())
+            PositionList = PositionList.append(PositionTemp, ignore_index=True)
+            print(PositionList.head())
+
+        dff = PositionList
+
 
     #Pie Graphs
 
@@ -520,7 +557,16 @@ def update_scatter_plot(dropdown_X,dropdown_Y,dropdown_Color,Season,Player_Check
     return pieyear, pielg, pieteam, scatter, violin
 
 
-
+@app.callback(
+    [Output("progress", "value"), Output("progress", "children")],
+    [Input("progress-interval", "n_intervals")],
+)
+def update_progress(n):
+    # check progress of some background process, in this example we'll just
+    # use n_intervals constrained to be in 0-100
+    progress = min(n % 110, 100)
+    # only add text after 5% progress to ensure text isn't squashed too much
+    return progress, f"{progress} %" if progress >= 5 else ""
 
 
 if __name__ == '__main__':
