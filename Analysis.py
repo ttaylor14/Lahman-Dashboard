@@ -13,8 +13,7 @@ df = pd.read_csv("Lahman_Batting_Combined.csv")
 
 df =  df[df['yearID']>2014]
 df =  df[df['AB']>100]
-columns = ['playerID', 'stint', 'birthCity', 'deathYear', 'deathMonth', 'deathDay', 'deathCountry', 'deathState', 'deathCity', 'nameFirst', 'nameLast', 'nameGiven', 'debut', 'finalGame', 'retroID', 'bbrefID', 'name', 'park', 'BPF', 'PPF', 'teamIDBR', 'teamIDlahman45', 'teamIDretro']
-df = df.drop(columns, axis=1)
+df = df[['H', 'HR', 'SB', 'RBI', 'Team_W', 'teamID']]
 print(df.head())
 print(df.shape)
 
@@ -39,8 +38,7 @@ df = pd.read_csv("Lahman_Pitching_Combined.csv")
 
 df =  df[df['yearID']>2014]
 df =  df[df['IPouts']>120]
-columns = ['playerID', 'G_c', 'G_1B', 'G_2B', 'G_3B', 'G_SS', 'G_LF', 'G_CF', 'G_RF', 'G_OF', 'G_DH', 'G_PH', 'G_pr', 'stint', 'birthCity', 'deathYear', 'deathMonth', 'deathDay', 'deathCountry', 'deathState', 'deathCity', 'nameFirst', 'nameLast', 'nameGiven', 'debut', 'finalGame', 'retroID', 'bbrefID', 'name', 'park', 'BPF', 'PPF', 'teamIDBR', 'teamIDlahman45', 'teamIDretro']
-df = df.drop(columns, axis=1)
+df = df[['GS', 'IPouts', 'ER', 'BB', 'SO', 'ERA', 'teamID']]
 print(df.head())
 print(df.shape)
 
