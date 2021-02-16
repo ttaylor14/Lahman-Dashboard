@@ -19,12 +19,12 @@ print(df.shape)
 
 print("Dataset: Success")
 # Create Plot
-sns.pairplot(df, kind="reg", diag_kind="hist", hue="teamID", palette="Set2")
-plt.show()
+fig1 = sns.pairplot(df, kind="reg", diag_kind="hist", hue="teamID", palette="Set2")
+# plt.show()
 
 print("Successful Plot")
 
-plt.savefig('images/batting_correlation_plot_2015-2020.png')
+fig1.savefig('images/batting_correlation_plot_2015-2020.png')
 
 print("Plot Saved Successful")
 
@@ -44,12 +44,12 @@ print(df.shape)
 
 print("Dataset: Success")
 # Create Plot
-sns.pairplot(df, kind="reg", diag_kind="hist", hue="teamID", palette="Set2")
-plt.show()
+fig2 = sns.pairplot(df, kind="reg", diag_kind="hist", hue="teamID", palette="Set2")
+# plt.show()
 
 print("Successful Plot")
 
-plt.savefig('images/pitching_correlation_plot_2015-2020.png')
+fig2.savefig('images/pitching_correlation_plot_2015-2020.png')
 
 print("Plot Saved Successful")
 
