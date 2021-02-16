@@ -122,7 +122,7 @@ app.layout = html.Div([
         ]),
 
         dbc.Row([
-            
+                # Left Axis Select
                 dbc.Col([
                     html.H6("Select X-Axis: "),
                     # Select 'X' Axis
@@ -199,7 +199,7 @@ app.layout = html.Div([
                     ]),
 
                 ]),
-
+                # Right Axis Select
                 dbc.Col([
                     
                     html.H6("Select Teams:"),
@@ -275,38 +275,72 @@ app.layout = html.Div([
 
 
         dbc.Row([
+            # Pie Charts
             dbc.Col([
 
                 # Pie Graphs
                 html.Div([
                 # BY: Years
+
+                dbc.Spinner(children=[
+
                 dcc.Graph(id='Year_Pie_graph', figure={},style={'width': '30vh', 'height': '30vh'}),
+
+                ], size="lg", color="primary", type="grow", fullscreen=False,),
+
                 ]),
                 
                 html.Div([
                 # BY: League
+
+                dbc.Spinner(children=[
+
                 dcc.Graph(id='Lg_Pie_graph', figure={},style={'width': '30vh', 'height': '30vh'}),
+
+                ], size="lg", color="primary", type="grow", fullscreen=False,),
+
                 ]),
                 
                 html.Div([
                 # BY: Teams
+
+                dbc.Spinner(children=[
+                    
                 dcc.Graph(id='Team_Pie_graph', figure={},style={'width': '30vh', 'height': '30vh'}),
+
+                
+                ], size="lg", color="primary", type="grow", fullscreen=False,),
+
                 ]),
                 
             ], width=3),
 
+            # Main Scatter Plot
             dbc.Col([
                 html.Div([
-                # Center Large Scatter Plot
-                dcc.Graph(id="scatter-plot", figure={},style={'width': '80vh', 'height': '80vh'})
+                # Center Large Scatter Plot - with spinner
+                dbc.Spinner(children=[
+                    
+                    dcc.Graph(id="scatter-plot", figure={},style={'width': '80vh', 'height': '80vh'})
+
+                ], size="lg", color="primary", type="grow", fullscreen=False,),
+                
                 ]),
                 
             ], width=6),
 
+            # Violin Plots
             dbc.Col([
                 html.Div([
                 # Right Violin Plot
+
+                dbc.Spinner(children=[
+                    
                 dcc.Graph(id="violin-plot", figure={},style={'width': '30vh', 'height': '80vh'})
+
+                
+                ], size="lg", color="primary", type="grow", fullscreen=False,),
+                
                 ]),
                 
             ], width=3),
@@ -316,12 +350,7 @@ app.layout = html.Div([
         dbc.Row([
 
 
-            html.Div(
-                [
-                    dcc.Interval(id="progress-interval", n_intervals=0, interval=500),
-                    dbc.Progress(id="progress"),
-                ]
-            )
+
 
         ]),
 
@@ -557,16 +586,6 @@ def update_scatter_plot(dropdown_X,dropdown_Y,dropdown_Color,Season,Player_Check
     return pieyear, pielg, pieteam, scatter, violin
 
 
-@app.callback(
-    [Output("progress", "value"), Output("progress", "children")],
-    [Input("progress-interval", "n_intervals")],
-)
-def update_progress(n):
-    # check progress of some background process, in this example we'll just
-    # use n_intervals constrained to be in 0-100
-    progress = min(n % 110, 100)
-    # only add text after 5% progress to ensure text isn't squashed too much
-    return progress, f"{progress} %" if progress >= 5 else ""
 
 
 if __name__ == '__main__':

@@ -273,40 +273,73 @@ app.layout = html.Div([
             
         ]),
 
-
         dbc.Row([
+            # Pie Charts
             dbc.Col([
 
                 # Pie Graphs
                 html.Div([
                 # BY: Years
+
+                dbc.Spinner(children=[
+
                 dcc.Graph(id='Year_Pie_graph', figure={},style={'width': '30vh', 'height': '30vh'}),
+
+                ], size="lg", color="primary", type="grow", fullscreen=False,),
+
                 ]),
                 
                 html.Div([
                 # BY: League
+
+                dbc.Spinner(children=[
+
                 dcc.Graph(id='Lg_Pie_graph', figure={},style={'width': '30vh', 'height': '30vh'}),
+
+                ], size="lg", color="primary", type="grow", fullscreen=False,),
+
                 ]),
                 
                 html.Div([
                 # BY: Teams
+
+                dbc.Spinner(children=[
+                    
                 dcc.Graph(id='Team_Pie_graph', figure={},style={'width': '30vh', 'height': '30vh'}),
+
+                
+                ], size="lg", color="primary", type="grow", fullscreen=False,),
+
                 ]),
                 
             ], width=3),
 
+            # Main Scatter Plot
             dbc.Col([
                 html.Div([
-                # Center Large Scatter Plot
-                dcc.Graph(id="scatter-plot", figure={},style={'width': '80vh', 'height': '80vh'})
+                # Center Large Scatter Plot - with spinner
+                dbc.Spinner(children=[
+                    
+                    dcc.Graph(id="scatter-plot", figure={},style={'width': '80vh', 'height': '80vh'})
+
+                ], size="lg", color="primary", type="grow", fullscreen=False,),
+                
                 ]),
                 
             ], width=6),
 
+            # Violin Plots
             dbc.Col([
                 html.Div([
                 # Right Violin Plot
+
+                dbc.Spinner(children=[
+                    
                 dcc.Graph(id="violin-plot", figure={},style={'width': '30vh', 'height': '80vh'})
+
+                
+                ], size="lg", color="primary", type="grow", fullscreen=False,),
+                
                 ]),
                 
             ], width=3),

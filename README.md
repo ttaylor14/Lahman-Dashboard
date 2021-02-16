@@ -27,10 +27,13 @@ File: 'lahmanBatting.py'
 
 The data was compiled from:
 
-All Historical Batting Stats : 'baseballdatabank-master/core/Batting.csv'
-All Historical Player Apperances : 'baseballdatabank-master/core/Appearances.csv'
-All Historical Player Information : 'baseballdatabank-master/core/People.csv'
-All Historical Team Information : 'baseballdatabank-master/core/Teams.csv'
+All Historical Batting Stats : *'baseballdatabank-master/core/Batting.csv'*
+
+All Historical Player Apperances : *'baseballdatabank-master/core/Appearances.csv'*
+
+All Historical Player Information : *'baseballdatabank-master/core/People.csv'*
+
+All Historical Team Information : *'baseballdatabank-master/core/Teams.csv'*
 
 ![plot](images/batting_correlation_plot_2015-2020.png)
 
@@ -43,10 +46,13 @@ File: 'lahmanPitching.py'
 
 The data was compiled from:
 
-All Historical Pitching Stats : 'baseballdatabank-master/core/Pitching.csv'
-All Historical Player Apperances : 'baseballdatabank-master/core/Appearances.csv'
-All Historical Player Information : 'baseballdatabank-master/core/People.csv'
-All Historical Team Information : 'baseballdatabank-master/core/Teams.csv'
+All Historical Pitching Stats : *'baseballdatabank-master/core/Pitching.csv'*
+
+All Historical Player Apperances : *'baseballdatabank-master/core/Appearances.csv'*
+
+All Historical Player Information : *'baseballdatabank-master/core/People.csv'*
+
+All Historical Team Information : *'baseballdatabank-master/core/Teams.csv'*
 
 ![plot](images/pitching_correlation_plot_2015-2020.png)
 
@@ -60,11 +66,15 @@ File: 'lahmanMerged.py'
 
 The data was compiled from:
 
-All Historical Batting Stats : 'baseballdatabank-master/core/Batting.csv'
-All Historical Pitching Stats : 'baseballdatabank-master/core/Pitching.csv'
-All Historical Player Apperances : 'baseballdatabank-master/core/Appearances.csv'
-All Historical Player Information : 'baseballdatabank-master/core/People.csv'
-All Historical Team Information : 'baseballdatabank-master/core/Teams.csv'
+All Historical Batting Stats : *'baseballdatabank-master/core/Batting.csv'*
+
+All Historical Pitching Stats : *'baseballdatabank-master/core/Pitching.csv'*
+
+All Historical Player Apperances : *'baseballdatabank-master/core/Appearances.csv'*
+
+All Historical Player Information : *'baseballdatabank-master/core/People.csv'*
+
+All Historical Team Information : *'baseballdatabank-master/core/Teams.csv'*
 
 
 
