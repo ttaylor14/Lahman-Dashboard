@@ -2,6 +2,8 @@
 Creating a visual interactive dashboard for the Lahman Historical baseball Database
 
 
+![plot](images/App_Overview.png)
+
 Lahman Database can be accessed at the following location:
 
 http://www.seanlahman.com/baseball-archive/statistics/
@@ -15,7 +17,7 @@ This can be done by Years, Teams, Leagues, Players, Positions, or any combinatio
 
 To adjust the graph output the user has the ability to select bothte  x-axis and y-axis values as well as the color grouping of the represented scatter and violin plots.
 
-![plot](images/App_Overview.png)
+![plot](images/App_Guide.gif)
 
 
 
