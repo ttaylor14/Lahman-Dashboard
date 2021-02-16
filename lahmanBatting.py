@@ -44,7 +44,8 @@ app.layout = html.Div([
 
                 # Page Title
 
-                html.H3("Baseball Visualizations: Lahman Batting Data")
+                html.H3("Baseball Visualizations: Lahman Batting Data", 
+                style={'fontSize': 32, 'margin-right': '5%', 'margin-left': '5%', 'margin-top': '2%', 'margin-bottom': '0.5%'})
                 
             ]),
 
@@ -198,7 +199,7 @@ app.layout = html.Div([
                     ),
                     ]),
 
-                ]),
+                ], style={'margin-left': '3%'}),
                 # Right Axis Select
                 dbc.Col([
                     
@@ -268,7 +269,7 @@ app.layout = html.Div([
                     ]),
 
                 
-                ]),
+                ], style={'margin-right': '3%'}),
                      
             
         ]),
@@ -280,35 +281,16 @@ app.layout = html.Div([
 
                 # Pie Graphs
                 html.Div([
-                # BY: Years
 
+                
                 dbc.Spinner(children=[
-
-                dcc.Graph(id='Year_Pie_graph', figure={},style={'width': '30vh', 'height': '30vh'}),
-
+                    dcc.Graph(id='sun-plot', figure={},style={'width': '130%', 'height': '130%'}),
                 ], size="lg", color="primary", type="grow", fullscreen=False,),
 
-                ]),
-                
-                html.Div([
-                # BY: League
+
 
                 dbc.Spinner(children=[
-
-                dcc.Graph(id='Lg_Pie_graph', figure={},style={'width': '30vh', 'height': '30vh'}),
-
-                ], size="lg", color="primary", type="grow", fullscreen=False,),
-
-                ]),
-                
-                html.Div([
-                # BY: Teams
-
-                dbc.Spinner(children=[
-                    
-                dcc.Graph(id='Team_Pie_graph', figure={},style={'width': '30vh', 'height': '30vh'}),
-
-                
+                    dcc.Graph(id='year_histo', figure={},style={'width': '100%', 'height': '30vh'}),
                 ], size="lg", color="primary", type="grow", fullscreen=False,),
 
                 ]),
@@ -321,7 +303,7 @@ app.layout = html.Div([
                 # Center Large Scatter Plot - with spinner
                 dbc.Spinner(children=[
                     
-                    dcc.Graph(id="scatter-plot", figure={},style={'width': '80vh', 'height': '80vh'})
+                    dcc.Graph(id="scatter-plot", figure={},style={'width': '100%', 'height': '60vh'})
 
                 ], size="lg", color="primary", type="grow", fullscreen=False,),
                 
@@ -336,7 +318,7 @@ app.layout = html.Div([
 
                 dbc.Spinner(children=[
                     
-                dcc.Graph(id="violin-plot", figure={},style={'width': '30vh', 'height': '80vh'})
+                dcc.Graph(id="violin-plot", figure={},style={'width': '100%', 'height': '60vh'})
 
                 
                 ], size="lg", color="primary", type="grow", fullscreen=False,),
@@ -347,12 +329,59 @@ app.layout = html.Div([
 
         ]),
 
+
         dbc.Row([
 
 
 
+            dbc.Col([
+                # BY: Years
+
+                dbc.Spinner(children=[
+
+                dcc.Graph(id='Year_Pie_graph', figure={},style={'width': '100%', 'height': '100%'}),
+
+                ], size="sm", color="primary", type="grow", fullscreen=False,),
+
+            ], width=3),
+
+
+            dbc.Col([
+                # BY: League
+
+                dbc.Spinner(children=[
+
+                dcc.Graph(id='Lg_Pie_graph', figure={},style={'width': '100%', 'height': '100%'}),
+
+                ], size="sm", color="primary", type="grow", fullscreen=False,),
+
+            ], width=3),
+
+
+            dbc.Col([
+                # BY: Teams
+
+                dbc.Spinner(children=[
+                    
+                dcc.Graph(id='Team_Pie_graph', figure={},style={'width': '100%', 'height': '100%'}),
+
+                
+                ], size="sm", color="primary", type="grow", fullscreen=False,),
+            ], width=3),
+
+            dbc.Col([
+                # BY: Teams
+
+                dbc.Spinner(children=[
+                    
+                dcc.Graph(id='team_histo', figure={},style={'width': '100%', 'height': '100%'}),
+
+                
+                ], size="sm", color="primary", type="grow", fullscreen=False,),
+            ], width=3),
 
         ]),
+
 
     ]),
 
@@ -481,7 +510,10 @@ def dropdown_player_options(Season, Lg_Checkbox, Team_Checkbox, input_pos_appear
     Output(component_id='Lg_Pie_graph', component_property='figure'),
     Output(component_id='Team_Pie_graph', component_property='figure'),
     Output("scatter-plot", "figure"), 
-    Output("violin-plot", "figure"), 
+    Output("violin-plot", "figure"),  
+    Output("sun-plot", "figure"),
+    Output("team_histo", "figure"), 
+    Output("year_histo", "figure"), 
     [Input(component_id='dropdown_X', component_property='value'),
     Input(component_id='dropdown_Y',component_property='value'),
     Input(component_id='dropdown_Color',component_property='value'),
@@ -581,10 +613,23 @@ def update_scatter_plot(dropdown_X,dropdown_Y,dropdown_Color,Season,Player_Check
         color=dropdown_Color, orientation='h',
         hover_data=[dff.nameGiven, dff.playerID])
 
+    sunteam=px.sunburst(dff,
+            path=['lgID', 'teamID'],
+            color='lgID'
+            )
+
+# 'G_p','G_c','G_as_1B','G_as_2B','G_as_3B','G_as_SS','G_as_LF','G_as_CF','G_as_RF','G_as_OF','G_as_PH','G_as_pr','G_as_DH'
+    teamHisto=px.histogram(dff,
+            x=dff.teamID
+            )
+
+    yearHisto=px.histogram(dff,
+            x=dff.yearID,
+            color=dff.yearID
+            )
 
 
-    return pieyear, pielg, pieteam, scatter, violin
-
+    return pieyear, pielg, pieteam, scatter, violin, sunteam, teamHisto, yearHisto
 
 
 
