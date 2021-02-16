@@ -13,7 +13,7 @@ Each of the following Dashboard utilize User's Input to narrow the range of incl
 This can be done by Years, Teams, Leagues, Players, Positions, or any combination the user seeks.
 
 
-To adjust the graph output the user has the ability to select bothte  x-axis and y-axis values as well as the color grouping of the represented scatter and violin plots.
+To adjust the graph output the user has the ability to select both the  x-axis and y-axis values as well as the color grouping of the represented scatter and violin plots.
 
 ![plot](images/App_Overview.png)
 
